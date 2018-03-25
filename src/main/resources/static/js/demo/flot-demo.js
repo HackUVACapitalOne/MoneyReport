@@ -37,12 +37,9 @@ $(function() {
     var barData = {
         label: "bar",
         data: [
-            [1, 34],
-            [2, 25],
-            [3, 19],
-            [4, 34],
-            [5, 32],
-            [6, 44]
+            ['Credit Card', 34],
+            ['Savings', 34],
+            ['Checkings', 34],
         ]
     };
     $.plot($("#flot-bar-chart"), [barData], barOptions);
@@ -87,12 +84,12 @@ $(function() {
     var barData = {
         label: "bar",
         data: [
-            [1, 34],
-            [2, 25],
-            [3, 19],
-            [4, 34],
-            [5, 32],
-            [6, 44]
+            [1391, 23602],
+            [2289, 21859],
+            [20826, 22256],
+            [23107, 29687],
+            [23857, 36213],
+            [31840, 31044]
         ]
     };
     $.plot($("#flot-line-chart"), [barData], barOptions);
@@ -102,24 +99,63 @@ $(function() {
 $(function() {
 
     var data = [{
-        label: "Sales 1",
+        label: "West Virginia",
         data: 21,
         color: "#d3d3d3",
     }, {
-        label: "Sales 2",
+        label: "Virginia",
         data: 3,
         color: "#bababa",
     }, {
-        label: "Sales 3",
+        label: "New Jersey",
         data: 15,
         color: "#79d2c0",
     }, {
-        label: "Sales 4",
+        label: "Pennsylvania",
         data: 52,
         color: "#1ab394",
     }];
 
     var plotObj = $.plot($("#flot-pie-chart"), data, {
+        series: {
+            pie: {
+                show: true
+            }
+        },
+        grid: {
+            hoverable: true
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+            shifts: {
+                x: 20,
+                y: 0
+            },
+            defaultTheme: false
+        }
+    });
+
+});
+
+//Flot Pie Chart
+$(function() {
+
+    var data = [{
+        label: "Checkings",
+        data: 20,
+        color: "#d3d3d3",
+    }, {
+        label: "Savings",
+        data: 48,
+        color: "#bababa",
+    }, {
+        label: "Credit Cards",
+        data: 32,
+        color: "#1ab394",
+    }];
+
+    var plotObj = $.plot($("#flot-pie-chart2"), data, {
         series: {
             pie: {
                 show: true
@@ -253,10 +289,10 @@ $(function() {
     function doPlot(position) {
         $.plot($("#flot-line-chart-multi"), [{
             data: oilprices,
-            label: "Oil price ($)"
+            label: "Completed"
         }, {
             data: exchangerates,
-            label: "USD/EUR exchange rate",
+            label: "Cancelled",
             yaxis: 2
         }], {
             xaxes: [{
@@ -268,7 +304,6 @@ $(function() {
                 // align if we are to the right
                 alignTicksWithAxis: position == "right" ? 1 : null,
                 position: position,
-                tickFormatter: euroFormatter
             }],
             legend: {
                 position: 'sw'
