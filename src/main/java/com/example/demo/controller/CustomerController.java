@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.captialone.Bill;
 import com.example.demo.model.captialone.Customer;
 import com.example.demo.model.captialone.ResourceConstants;
 import com.example.demo.model.captialone.result.ResultAccount;
@@ -11,18 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("customer")
 public class CustomerController {
-    @ResponseBody
     @RequestMapping("/list")
-    public String billList() {
+    public String billList(Model model) {
         RestTemplate restTemplate = new RestTemplate();
 
         ResultCustomer resultCustomer = restTemplate.getForObject(
                 ResourceConstants.route + "customers" + ResourceConstants.api_key, ResultCustomer.class
         );
-        return resultCustomer.getResults().get(0).toString();
+        ArrayList<Customer> customers = new ArrayList<>();
+
+        for(int i = 0; i < 50; i++){
+            customers.add(resultCustomer.getResults().get(i));
+        }
+        model.addAttribute("customers", customers);
+        return "model/customer/list";
     }
 
     @ResponseBody
