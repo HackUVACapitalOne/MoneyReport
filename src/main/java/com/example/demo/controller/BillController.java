@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.captialone.Customer;
+import com.example.demo.model.captialone.Account;
+import com.example.demo.model.captialone.Bill;
 import com.example.demo.model.captialone.ResourceConstants;
 import com.example.demo.model.captialone.result.ResultAccount;
-import com.example.demo.model.captialone.result.ResultCustomer;
+import com.example.demo.model.captialone.result.ResultBill;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,17 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
-@RequestMapping("customer")
-public class CustomerController {
+@RequestMapping("bill")
+public class BillController {
     @ResponseBody
     @RequestMapping("/list")
     public String billList() {
         RestTemplate restTemplate = new RestTemplate();
 
-        ResultCustomer resultCustomer = restTemplate.getForObject(
-                ResourceConstants.route + "customers" + ResourceConstants.api_key, ResultCustomer.class
+        ResultBill resultBill = restTemplate.getForObject(
+                ResourceConstants.route + "bills" + ResourceConstants.api_key, ResultBill.class
         );
-        return resultCustomer.getResults().get(0).toString();
+        return resultBill.getResults().get(0).toString();
     }
 
     @ResponseBody
@@ -30,9 +31,10 @@ public class CustomerController {
     public String accountDetail(@PathVariable("id") String id, Model model){
         RestTemplate restTemplate = new RestTemplate();
 
-        Customer customer = restTemplate.getForObject(
-                ResourceConstants.route + "customers/" + id + ResourceConstants.api_key, Customer.class
+        Bill bill = restTemplate.getForObject(
+                ResourceConstants.route + "bills/" + id + ResourceConstants.api_key, Bill.class
         );
-        return customer.toString();
+        return bill.toString();
     }
+
 }

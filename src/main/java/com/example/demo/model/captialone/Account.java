@@ -8,15 +8,15 @@ import java.math.BigDecimal;
 public class Account {
     private String _id;
 
-    private String type;
+    private BigDecimal balance;
+
+    private String customer_id;
 
     private String nickname;
 
     private BigDecimal rewards;
 
-    private BigDecimal balance;
-
-    private String customer_id;
+    private String type;
 
     public Account() {
     }
@@ -45,20 +45,20 @@ public class Account {
         this.nickname = nickname;
     }
 
-    public BigDecimal getRewards() {
-        return rewards;
-    }
-
-    public void setRewards(BigDecimal rewards) {
-        this.rewards = rewards;
-    }
-
     public BigDecimal getBalance() {
         return balance;
     }
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public BigDecimal getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(BigDecimal rewards) {
+        this.rewards = rewards;
     }
 
     public String getCustomer_id() {
